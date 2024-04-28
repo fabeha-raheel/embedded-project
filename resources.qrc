@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="images">
+    <file>human-icon.jpg</file>
+    <file>pcs_images/1.JPG</file>
+    <file>pcs_images/2.JPG</file>
+    <file>pcs_images/3.JPG</file>
+    <file>pcs_images/4.JPG</file>
+    <file>pcs_images/5.JPG</file>
+    <file>pcs_images/6.JPG</file>
+    <file>pcs_images/7.JPG</file>
+    <file>pcs_images/8.JPG</file>
+    <file>pcs_images/9.JPG</file>
+    <file>pcs_images/10.JPG</file>
+    <file>pcs_images/11.JPG</file>
+  </qresource>
+</RCC>
