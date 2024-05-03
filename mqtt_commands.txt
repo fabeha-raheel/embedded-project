@@ -1,0 +1,8 @@
+Changes in mosquitto.conf file:
+
+listener 1883
+allow_anonymous true
+
+To start the Mosquitto Broker:
+cd "C:\Program Files\mosquitto" 
+mosquitto -v -c mosquitto.conf

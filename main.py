@@ -17,16 +17,16 @@ class MainWindow(QMainWindow):
         
         self.sounds_dir = "pcs_sounds"
         
-        self.point2 = ["Aortic Stenosis", "Bronchial breath sounds"]
-        self.point3 = ["Splitting Second Heart Sound", "Fixed Splitting Second Heart Sound"]
-        self.point4 = ["Aortic Regurgitation"]
-        self.point5 = ["Innocent Murmur"]
-        self.point6 = ["Coarse Crackles"]
-        self.point7 = ["Normal Heart", "Third Heart", "Fourth Heart Sound", "Mid Systolic Click", "Mitral Valve Leaflet Prolapse",
-                       "Mitral Regurgitation", "Mitral Stenosis", "Pleural Rubs"]
-        self.point8 = ["Stridor"]
-        self.point9 = ["Wheeze", "Rhonchi"]
-        self.point10 = ["Fine Crackles", "Normal Vesicular"]
+        self.point2 = ["H02_Aortic Stenosis", "L01_Bronchial breath sounds"]
+        self.point3 = ["H11_Splitting Second Heart Sound", "H03_Fixed Splitting Second Heart Sound"]
+        self.point4 = ["H01_Aortic Regurgitation"]
+        self.point5 = ["H05_Innocent Murmur"]
+        self.point6 = ["L02_Coarse Crackles"]
+        self.point7 = ["H10_Normal Heart", "H12_Third Heart", "H04_Fourth Heart Sound", "H06_Mid Systolic Click", "H09_Mitral Valve Leaflet Prolapse",
+                       "H07_Mitral Regurgitation", "H08_Mitral Stenosis", "L05_Pleural Rubs"]
+        self.point8 = ["L07_Stridor"]
+        self.point9 = ["L08_Wheeze", "L06_Rhonchi"]
+        self.point10 = ["L03_Fine Crackles", "L04_Normal Vesicular"]
         
         self.populate_combo_box(self.heart_sounds_list, self.sounds_dir+r"\heart")
         self.populate_combo_box(self.lungs_sounds_list, self.sounds_dir+r"\lungs")
@@ -49,11 +49,13 @@ class MainWindow(QMainWindow):
         self.bowel_sounds_list.currentIndexChanged.connect(self.choose_bowel_sound)
         
         self.play_button.clicked.connect(self.play_pause_video)
-        self.stop_button.clicked.connect(lambda: self.media_player.stop())
+        self.stop_button.clicked.connect(self.stop_video)
         
         self.heart_sound_select.setChecked(True)
         self.point_selected = 'Heart'
         self.update_video_widget()
+        self.media_player.play()
+        self.media_player.pause()
 
     def populate_combo_box(self, combo_box, directory):
         files = os.listdir(directory)
@@ -76,6 +78,8 @@ class MainWindow(QMainWindow):
                 self.update_image("4")
             else:
                 self.update_image("5")
+                
+            self.update_video_widget()
         
         self.heart_sound_select.setChecked(True)
         self.play_button.setText("Play")
@@ -96,6 +100,8 @@ class MainWindow(QMainWindow):
                 self.update_image("9")
             else:
                 self.update_image("10")
+                
+            self.update_video_widget()
         
         self.lungs_sound_select.setChecked(True)
         self.play_button.setText("Play")
@@ -103,6 +109,8 @@ class MainWindow(QMainWindow):
     def choose_bowel_sound(self):
         if self.bowel_sound_select.isChecked():
             self.update_image("11")
+            
+            self.update_video_widget()
             
         self.bowel_sound_select.setChecked(True)
         self.play_button.setText("Play")
@@ -165,6 +173,8 @@ class MainWindow(QMainWindow):
         if selected_combo_box:
             video_file = os.path.join(self.sounds_dir, self.point_selected.lower(), f"{selected_combo_box.currentText()}.mp4")
             self.media_player.setMedia(QMediaContent(QUrl.fromLocalFile(video_file)))
+            self.media_player.play()
+            self.media_player.pause()
             
     def play_pause_video(self):
         if self.play_button.text() == "Play":
@@ -172,6 +182,11 @@ class MainWindow(QMainWindow):
             self.play_button.setText("Pause")
         else:
             self.media_player.pause()
+            self.play_button.setText("Play")
+            
+    def stop_video(self):
+        self.media_player.stop()
+        if self.play_button.text() == "Pause":
             self.play_button.setText("Play")
 
     def update_image(self, image):

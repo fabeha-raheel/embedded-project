@@ -39,12 +39,14 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>50</height>
+          <height>80</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
+          <pointsize>15</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -136,16 +138,22 @@
           <widget class="QComboBox" name="bowel_sounds_list">
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
           <widget class="QPushButton" name="connect_button">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -172,7 +180,7 @@ QPushButton:pressed {
           <widget class="QLineEdit" name="manikin_port">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -190,9 +198,15 @@ QPushButton:pressed {
          </item>
          <item row="12" column="2">
           <widget class="QPushButton" name="stop_button">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -217,9 +231,15 @@ QPushButton:pressed {
          </item>
          <item row="12" column="0" colspan="2">
           <widget class="QPushButton" name="play_button">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -246,7 +266,7 @@ QPushButton:pressed {
           <widget class="QRadioButton" name="lungs_sound_select">
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="text">
@@ -258,7 +278,7 @@ QPushButton:pressed {
           <widget class="QComboBox" name="lungs_sounds_list">
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
           </widget>
@@ -267,7 +287,7 @@ QPushButton:pressed {
           <widget class="QRadioButton" name="heart_sound_select">
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="text">
@@ -291,7 +311,7 @@ QPushButton:pressed {
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>14</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -317,7 +337,7 @@ QPushButton:pressed {
            </property>
            <property name="font">
             <font>
-             <pointsize>12</pointsize>
+             <pointsize>14</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -331,7 +351,7 @@ QPushButton:pressed {
           <widget class="QRadioButton" name="bowel_sound_select">
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="text">
@@ -343,7 +363,7 @@ QPushButton:pressed {
           <widget class="QComboBox" name="heart_sounds_list">
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
           </widget>
@@ -352,7 +372,7 @@ QPushButton:pressed {
           <widget class="QLineEdit" name="manikin_ip">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>12</pointsize>
             </font>
            </property>
            <property name="styleSheet">
