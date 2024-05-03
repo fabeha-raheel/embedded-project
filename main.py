@@ -54,8 +54,6 @@ class MainWindow(QMainWindow):
         self.heart_sound_select.setChecked(True)
         self.point_selected = 'Heart'
         self.update_video_widget()
-        self.media_player.play()
-        self.media_player.pause()
 
     def populate_combo_box(self, combo_box, directory):
         files = os.listdir(directory)
