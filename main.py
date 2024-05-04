@@ -10,6 +10,9 @@ from PyQt5.QtGui import QPixmap
 # 'pyrcc5 -o resources.py resources.qrc'
 import resources
 
+import paho.mqtt.client as mqtt
+import threading
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -50,10 +53,25 @@ class MainWindow(QMainWindow):
         
         self.play_button.clicked.connect(self.play_pause_video)
         self.stop_button.clicked.connect(self.stop_video)
+        self.play_device_button.clicked.connect(self.play_on_device)
         
         self.heart_sound_select.setChecked(True)
         self.point_selected = 'Heart'
         self.update_video_widget()
+        
+        self.client_topic_name = 'ascultation/sounds'
+        
+        self.mqtt_client_thread = threading.Thread(target=self.client_thread, daemon=True)
+        self.mqtt_client_thread.start()
+        
+    def client_thread(self):
+        self.mqtt_client = mqtt.Client()
+        self.mqtt_client.on_connect = self.on_connect
+        self.mqtt_client.on_message = self.on_message
+        
+        self.mqtt_client.connect("192.168.8.101", 1883, 60)
+        
+        self.mqtt_client.loop_forever()
 
     def populate_combo_box(self, combo_box, directory):
         files = os.listdir(directory)
@@ -168,8 +186,10 @@ class MainWindow(QMainWindow):
         elif self.point_selected == 'Bowel':
             selected_combo_box = self.bowel_sounds_list
             
+        self.sound_selected = selected_combo_box.currentText()
+            
         if selected_combo_box:
-            video_file = os.path.join(self.sounds_dir, self.point_selected.lower(), f"{selected_combo_box.currentText()}.mp4")
+            video_file = os.path.join(self.sounds_dir, self.point_selected.lower(), f"{self.sound_selected}.mp4")
             self.media_player.setMedia(QMediaContent(QUrl.fromLocalFile(video_file)))
             self.media_player.play()
             self.media_player.pause()
@@ -186,10 +206,21 @@ class MainWindow(QMainWindow):
         self.media_player.stop()
         if self.play_button.text() == "Pause":
             self.play_button.setText("Play")
+            
+    def play_on_device(self):
+        self.mqtt_client.publish(self.client_topic_name, self.sound_selected[0:3])
 
     def update_image(self, image):
         pixmap = QPixmap(r"pcs_images/" + image + r".jpg")
         self.manikin_icon.setPixmap(pixmap)
+        
+    # Define callback functions
+    def on_connect(client, userdata, flags, rc):
+        print("Connected with result code "+str(rc))
+        client.subscribe("test/topic")  # Subscribe to the topic
+
+    def on_message(client, userdata, msg):
+        print(msg.topic+" "+str(msg.payload))  # Print received message
         
             
         

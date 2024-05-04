@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="images">
+    <file>nust_logo.png</file>
     <file>human-icon.jpg</file>
+    <file>eme-logo.png</file>
     <file>pcs_images/1.JPG</file>
     <file>pcs_images/2.JPG</file>
     <file>pcs_images/3.JPG</file>
