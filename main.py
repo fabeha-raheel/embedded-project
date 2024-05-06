@@ -13,6 +13,8 @@ import resources
 import paho.mqtt.client as mqtt
 import threading
 
+MQTT_BROKER_IP = "192.168.8.110"
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -69,7 +71,7 @@ class MainWindow(QMainWindow):
         self.mqtt_client.on_connect = self.on_connect
         self.mqtt_client.on_message = self.on_message
         
-        self.mqtt_client.connect("192.168.8.101", 1883, 60)
+        self.mqtt_client.connect(MQTT_BROKER_IP, 1883, 60)
         
         self.mqtt_client.loop_forever()
 
@@ -215,9 +217,9 @@ class MainWindow(QMainWindow):
         self.manikin_icon.setPixmap(pixmap)
         
     # Define callback functions
-    def on_connect(client, userdata, flags, rc):
+    def on_connect(self, client, userdata, flags, rc):
         print("Connected with result code "+str(rc))
-        client.subscribe("test/topic")  # Subscribe to the topic
+        self.mqtt_client.subscribe("test/topic")  # Subscribe to the topic
 
     def on_message(client, userdata, msg):
         print(msg.topic+" "+str(msg.payload))  # Print received message
